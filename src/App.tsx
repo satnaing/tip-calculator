@@ -9,6 +9,7 @@ const percents = [5, 10, 15, 25, 50];
 function App() {
   const [bill, setBill] = useState<number | string>("");
   const [tipPercent, setTipPercent] = useState<undefined | number>(undefined);
+  const [customTip, setCustomTip] = useState<number | string>("");
   const [numPpl, setNumPpl] = useState<number | string>("");
 
   const [tipAmount, setTipAmount] = useState<number | string>(0);
@@ -24,7 +25,13 @@ function App() {
     amount: number
   ) => {
     setTipPercent(amount);
-    // e.currentTarget.classList.add("tip__selected");
+    setCustomTip("");
+  };
+
+  const handleCustomTip = (e: React.FormEvent<HTMLInputElement>) => {
+    const tipValue = parseFloat(e.currentTarget.value);
+    setTipPercent(undefined);
+    if (tipValue >= 0 && tipValue <= 100) setCustomTip(tipValue);
   };
 
   const handleNumOfPpl = (e: React.FormEvent<HTMLInputElement>) => {
@@ -34,8 +41,9 @@ function App() {
 
   const handleReset = () => {
     setBill("");
+    setCustomTip("");
     setTipPercent(undefined);
-    setNumPpl(0);
+    setNumPpl("");
     setTipAmount(0);
     setTotalAmount(0);
   };
@@ -45,24 +53,25 @@ function App() {
   };
 
   useEffect(() => {
-    if (
-      bill !== 0 &&
-      tipPercent !== undefined &&
-      numPpl !== 0 &&
-      numPpl !== ""
-    ) {
-      const currentBill = bill as number;
-      const currentNumPeople = numPpl as number;
+    if (bill === 0) return;
+    if (tipPercent === undefined && customTip === "") return;
+    if (numPpl === 0 || numPpl === "") return;
 
-      const tipPerPerson =
-        ((currentBill / 100) * tipPercent) / currentNumPeople;
-      const totalTipAmount = (currentBill / 100) * tipPercent;
-      const totalPerPerson = (currentBill + totalTipAmount) / currentNumPeople;
+    let tipValue;
+    tipPercent
+      ? (tipValue = tipPercent as number)
+      : (tipValue = customTip as number);
 
-      setTipAmount(tipPerPerson.toLocaleString());
-      setTotalAmount(totalPerPerson.toLocaleString());
-    }
-  }, [bill, tipPercent, numPpl, setTipAmount]);
+    const currentBill = bill as number;
+    const currentNumPeople = numPpl as number;
+
+    const tipPerPerson = ((currentBill / 100) * tipValue) / currentNumPeople;
+    const totalTipAmount = (currentBill / 100) * tipValue;
+    const totalPerPerson = (currentBill + totalTipAmount) / currentNumPeople;
+
+    setTipAmount(tipPerPerson.toLocaleString());
+    setTotalAmount(totalPerPerson.toLocaleString());
+  }, [bill, tipPercent, numPpl, customTip, setTipAmount]);
 
   return (
     <>
@@ -75,7 +84,7 @@ function App() {
               inputId="bill"
               icon="bx-dollar"
               onChange={handleBillInput}
-              value={isNaN(bill as number) ? 0 : bill}
+              value={isNaN(bill as number) ? "" : bill}
             />
           </div>
 
@@ -96,10 +105,14 @@ function App() {
                 );
               })}
               <input
-                type="text"
+                type="number"
                 className="tip__custom"
                 id="tip"
                 placeholder="Custom"
+                min="1"
+                max="5"
+                onChange={handleCustomTip}
+                value={isNaN(customTip as number) ? "" : customTip}
               />
             </div>
           </div>
@@ -107,14 +120,13 @@ function App() {
           <div className="num__ppl__container">
             <label htmlFor="num-of-people">Number of People</label>
             <span className="text__error">Can't be Zero</span>
-            {/* <input type="text" onChange /> */}
             <Input
               icon="bxs-user"
               inputId="num-of-people"
               // error
               onChange={handleNumOfPpl}
               extraClass="input__ppl"
-              value={isNaN(numPpl as number) ? 0 : numPpl}
+              value={isNaN(numPpl as number) ? "" : numPpl}
             />
           </div>
 
@@ -122,14 +134,16 @@ function App() {
             <div className="tip__amount amount__container">
               <h3 className="amount__title">Tip Amount</h3>
               <span className="per__person">/ person</span>
-              <span className="amount">{tipAmount}</span>
-              {/* $4.27 */}
+              <span className="amount">
+                {isNaN(tipAmount as number) ? 0 : tipAmount}
+              </span>
             </div>
             <div className="total__amount amount__container">
               <h3 className="amount__title">Total</h3>
               <span className="per__person">/ person</span>
-              <span className="amount">{totalAmount}</span>
-              {/* $32.79 */}
+              <span className="amount">
+                {isNaN(totalAmount as number) ? 0 : totalAmount}
+              </span>
             </div>
             <Button onClick={handleReset} reset>
               RESET
