@@ -28,6 +28,12 @@
   }
 }
 
+@include tablet {
+  .reset__btn {
+    align-self: end;
+  }
+}
+
 .tip__btn {
   background-color: $cyan-dark;
   color: $white;

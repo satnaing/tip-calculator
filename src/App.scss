@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+@import "styles/base";
+
+.form__shadow {
+  box-shadow: $cyan 0px 2px 4px 0px, $cyan-dark 0px 2px 16px 0px;
+  transition: all 300;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* ========== FORM ========== */
+.app__container {
+  .app__form {
+    background-color: $white;
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 2rem 1.875rem;
+    color: $gray;
+    display: grid;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    .text__error {
+      float: right;
+      color: $red;
+      font-size: $small-font-size;
+      margin-top: 0.25rem;
+    }
+
+    .tip__inputs {
+      display: grid;
+      grid-template-columns: repeat(2, (minmax(0, 1fr)));
+      gap: 1rem;
+      margin-top: $m-sm;
+      margin-bottom: $m-xl;
+
+      .tip__custom {
+        font-size: $bigger-font-size;
+        font-weight: $font-bold;
+        font-family: $font-family;
+        color: $cyan-dark;
+        background-color: $cyan-lighter;
+        border: none;
+        border-radius: 0.25rem;
+        text-align: right;
+        padding: 0 0.75rem;
+
+        &:focus {
+          outline: none;
+          box-shadow: $box-shadow-ring;
+        }
+      }
+    }
+
+    .result__container {
+      background-color: $cyan-dark;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+
+      .total__amount {
+        margin-bottom: 1rem;
+      }
+
+      .amount__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .amount__title {
+          color: $white;
+          font-size: $base-font-size;
+          font-weight: $font-bold;
+        }
+
+        .per__person {
+          grid-row: 2/ 3;
+          grid-column: 1/ 2;
+          font-size: $small-font-size;
+          font-weight: $font-bold;
+        }
+
+        .amount {
+          grid-row: 1 / 3;
+          grid-column: 2 / 3;
+
+          font-size: $biggest-font-size;
+          font-weight: $font-bold;
+          text-align: right;
+          color: $cyan;
+        }
+      }
+
+      .tip__amount {
+        margin-top: $m-sm;
+        margin-bottom: $m-lg;
+      }
+    }
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+@include tablet {
+  .app__container {
+    .app__form {
+      max-width: 920px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: 2rem;
+      grid-template-areas:
+        "bill result"
+        "tip result"
+        "ppl result";
 
-.App-link {
-  color: #61dafb;
-}
+      .bill__container {
+        grid-area: bill;
+      }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+      .tip__container {
+        grid-area: tip;
+
+        .tip__inputs {
+          grid-template-columns: repeat(3, (minmax(0, 1fr)));
+          margin-bottom: $m-2xl;
+        }
+      }
+
+      .num__ppl__container {
+        grid-area: ppl;
+      }
+
+      .result__container {
+        grid-area: result;
+
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+      }
+
+      .input__ppl {
+        margin-bottom: $m;
+      }
+    }
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: $tablet) {
+  .app__form {
+    z-index: 10;
+    position: relative;
+    margin-top: 9.5rem;
+    transition: box-shadow 200ms;
   }
 }

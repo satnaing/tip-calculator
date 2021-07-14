@@ -6,21 +6,31 @@ type Props = {
   icon: string;
   type?: string;
   error?: boolean;
+  extraClass?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  value: number | string;
 };
 
 const Input: FC<Props> = ({
   inputId = "",
   icon,
-  type = "text",
+  type = "number",
   error = false,
+  extraClass = "",
+  onChange,
+  value,
 }) => {
   return (
-    <div className="input__container">
+    <div className={`input__container ${extraClass}`}>
       <i className={`bx ${icon} input__icon`}></i>
       <input
         type={type}
         id={inputId}
-        className={`${error ? "input__error" : ""} `}
+        className={`${error ? "input__error" : ""}`}
+        onChange={onChange}
+        value={value}
+        min="0"
+        step="any"
       />
     </div>
   );

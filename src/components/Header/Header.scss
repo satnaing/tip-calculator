@@ -1,0 +1,29 @@
+@import "styles/base";
+
+/* ========== HEADER ========== */
+header {
+  h1 {
+    letter-spacing: 0.5rem;
+    font-size: $bigger-font-size;
+    font-weight: $font-bold;
+    color: $cyan-dark;
+    text-align: center;
+    margin: 2.5rem auto;
+  }
+}
+
+@include tablet {
+  header h1 {
+    margin: 5rem auto;
+  }
+}
+
+@media (max-width: $tablet) {
+  header {
+    top: 0;
+    position: fixed;
+    margin: auto;
+    display: block;
+    width: 100%;
+  }
+}

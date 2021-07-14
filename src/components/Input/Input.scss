@@ -36,3 +36,9 @@
     box-shadow: $box-shadow-ring-error;
   }
 }
+
+@include tablet {
+  .input__container {
+    margin-bottom: $m-2xl;
+  }
+}
