@@ -73,6 +73,8 @@ function App() {
     setTotalAmount(totalPerPerson.toLocaleString());
   }, [bill, tipPercent, numPpl, customTip, setTipAmount]);
 
+  console.log(totalAmount === "NaN");
+
   return (
     <>
       <Header />
@@ -114,8 +116,8 @@ function App() {
                 className="tip__custom"
                 id="tip"
                 placeholder="Custom"
-                min="1"
-                max="5"
+                min="0"
+                max="100"
                 onChange={handleCustomTip}
                 value={isNaN(customTip as number) ? "" : customTip}
               />
@@ -140,16 +142,14 @@ function App() {
               <h2 className="amount__title">Tip Amount</h2>
               <span className="per__person">/ person</span>
               <span data-testid="tip-amount" className="amount">
-                {/* {isNaN(tipAmount) ? "0" : tipAmount} */}
-                {tipAmount}
+                {tipAmount === "NaN" ? "0" : tipAmount}
               </span>
             </div>
             <div className="total__amount amount__container">
               <h2 className="amount__title">Total</h2>
               <span className="per__person">/ person</span>
               <span className="amount">
-                {/* {isNaN(totalAmount as number) ? "0" : totalAmount} */}
-                {totalAmount}
+                {totalAmount === "NaN" ? "0" : totalAmount}
               </span>
             </div>
             <Button onClick={handleReset} reset>
