@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("tips amount to be zero", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const tipAmount = screen.getByTestId("tip-amount");
+  expect(tipAmount).not.toBeNull;
+  expect(tipAmount).not.toBeNaN;
+  expect(tipAmount).toHaveTextContent("0");
 });

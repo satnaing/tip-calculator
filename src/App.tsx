@@ -12,8 +12,8 @@ function App() {
   const [customTip, setCustomTip] = useState<number | string>("");
   const [numPpl, setNumPpl] = useState<number | string>("");
 
-  const [tipAmount, setTipAmount] = useState<number | string>(0);
-  const [totalAmount, setTotalAmount] = useState<number | string>(0);
+  const [tipAmount, setTipAmount] = useState<string>("0");
+  const [totalAmount, setTotalAmount] = useState<string>("0");
 
   const handleBillInput = (e: React.FormEvent<HTMLInputElement>) => {
     const inputValue = parseFloat(e.currentTarget.value);
@@ -44,8 +44,8 @@ function App() {
     setCustomTip("");
     setTipPercent(undefined);
     setNumPpl("");
-    setTipAmount(0);
-    setTotalAmount(0);
+    setTipAmount("0");
+    setTotalAmount("0");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -139,15 +139,17 @@ function App() {
             <div className="tip__amount amount__container">
               <h2 className="amount__title">Tip Amount</h2>
               <span className="per__person">/ person</span>
-              <span className="amount">
-                {isNaN(tipAmount as number) ? 0 : tipAmount}
+              <span data-testid="tip-amount" className="amount">
+                {/* {isNaN(tipAmount) ? "0" : tipAmount} */}
+                {tipAmount}
               </span>
             </div>
             <div className="total__amount amount__container">
               <h2 className="amount__title">Total</h2>
               <span className="per__person">/ person</span>
               <span className="amount">
-                {isNaN(totalAmount as number) ? 0 : totalAmount}
+                {/* {isNaN(totalAmount as number) ? "0" : totalAmount} */}
+                {totalAmount}
               </span>
             </div>
             <Button onClick={handleReset} reset>
