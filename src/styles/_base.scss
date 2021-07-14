@@ -1,0 +1,93 @@
+/* ========== IMPORT FONT ========== */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+/* ========== FONT & TYPO ========== */
+$small-font-size: 0.813rem; // 13px
+$base-font-size: 1rem; // 16px
+$big-font-size: 1.625rem; // 20px
+$bigger-font-size: 1.5rem; // 24px
+$biggest-font-size: 2rem; // 32px
+
+$font-bold: 700;
+
+$font-family: "Space Mono", monospace;
+
+/* ========== VARIABLES ========== */
+$cyan: hsl(172, 67%, 45%);
+$cyan-state: hsl(173, 61%, 77%);
+$cyan-light: hsl(185, 41%, 84%);
+$cyan-lighter: hsl(189, 41%, 97%);
+$cyan-dark: hsl(183, 100%, 15%);
+$gray: hsl(186, 14%, 43%);
+$gray-light: hsl(184, 14%, 56%);
+$white: hsl(0, 0%, 100%);
+$red: hsl(0, 86%, 60%);
+
+/* ========== BOX SHADOWS ========== */
+$box-shadow-ring: 0 0 0 2px $cyan;
+$box-shadow-ring-2: 0 0 0 3px $cyan;
+$box-shadow-ring-3: 0 0 0 3px $cyan-light;
+$box-shadow-ring-error: 0 0 0 2px $red;
+
+/* ========== MARGINS ========== */
+$m-xs: 0.25rem;
+$m-sm: 0.5rem; // m-top
+$m: 1rem;
+$m-lg: 1.5rem;
+$m-xl: 1.75rem; // m-bottom
+$m-2xl: 2rem;
+
+/* ========== SCREEN SIZES ========== */
+$tablet: 576px;
+$laptop: 768px;
+$desktop: 1024px;
+// $desktop: 1400px;
+
+/* ========== MEDIA QUERY MIXINS ========== */
+@mixin tablet {
+  @media only screen and (min-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media only screen and (min-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $desktop) {
+    @content;
+  }
+}
+
+/* ========== RESETS ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $base-font-size;
+  background-color: $cyan-light;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}

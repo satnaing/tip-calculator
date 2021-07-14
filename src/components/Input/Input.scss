@@ -1,0 +1,38 @@
+@import "styles/base";
+
+.input__container {
+  width: 100%;
+  margin-top: $m-sm;
+  margin-bottom: $m-xl;
+
+  .input__icon {
+    font-size: 1.5rem;
+    padding: 0.75rem;
+    min-width: 2.5rem;
+    position: absolute;
+    color: $gray-light;
+  }
+
+  input {
+    background-color: $cyan-lighter;
+    outline: none;
+    border: none;
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.25rem 0.75rem;
+    padding-left: 2.5rem;
+    text-align: right;
+    font-size: $bigger-font-size;
+    font-weight: $font-bold;
+    font-family: $font-family;
+    color: $cyan-dark;
+
+    &:focus {
+      box-shadow: $box-shadow-ring;
+    }
+  }
+
+  .input__error {
+    box-shadow: $box-shadow-ring-error;
+  }
+}

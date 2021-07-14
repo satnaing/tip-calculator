@@ -1,0 +1,50 @@
+@import "styles/base";
+
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  font-weight: $font-bold;
+  font-family: $font-family;
+}
+
+.reset__btn {
+  width: 100%;
+  margin-top: $m-lg;
+
+  background-color: $cyan;
+  color: $cyan-dark;
+  font-size: $big-font-size;
+
+  &:hover {
+    background-color: $cyan-state;
+    color: $cyan-dark;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $box-shadow-ring-3;
+  }
+}
+
+.tip__btn {
+  background-color: $cyan-dark;
+  color: $white;
+  font-size: $bigger-font-size;
+
+  &:hover {
+    background-color: $cyan-state;
+    color: $cyan-dark;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $box-shadow-ring-2;
+  }
+}
+
+.tip__selected {
+  background-color: $cyan;
+  color: $cyan-dark;
+}
