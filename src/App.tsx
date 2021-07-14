@@ -77,7 +77,12 @@ function App() {
     <>
       <Header />
       <main className="app__container">
-        <form onSubmit={handleSubmit} action="" className="app__form">
+        <form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          action=""
+          className="app__form"
+        >
           <div className="bill__container">
             <label htmlFor="bill">Bill</label>
             <Input
