@@ -9,6 +9,7 @@ type Props = {
   extraClass?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   value: number | string;
+  dataTestId?: string;
 };
 
 const Input: FC<Props> = ({
@@ -19,11 +20,13 @@ const Input: FC<Props> = ({
   extraClass = "",
   onChange,
   value,
+  dataTestId,
 }) => {
   return (
     <div className={`input__container ${extraClass}`}>
       <i className={`bx ${icon} input__icon`}></i>
       <input
+        data-testid={dataTestId}
         type={type}
         id={inputId}
         className={`${error ? "input__error" : ""}`}

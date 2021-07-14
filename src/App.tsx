@@ -73,8 +73,6 @@ function App() {
     setTotalAmount(totalPerPerson.toLocaleString());
   }, [bill, tipPercent, numPpl, customTip, setTipAmount]);
 
-  console.log(totalAmount === "NaN");
-
   return (
     <>
       <Header />
@@ -88,6 +86,7 @@ function App() {
           <div className="bill__container">
             <label htmlFor="bill">Bill</label>
             <Input
+              dataTestId="bill-input"
               inputId="bill"
               icon="bx-dollar"
               onChange={handleBillInput}
@@ -112,6 +111,7 @@ function App() {
                 );
               })}
               <input
+                data-testid="custom-tip"
                 type="number"
                 className="tip__custom"
                 id="tip"
@@ -128,6 +128,7 @@ function App() {
             <label htmlFor="num-of-people">Number of People</label>
             {/* <span className="text__error">Can't be Zero</span> */}
             <Input
+              dataTestId="ppl-input"
               icon="bxs-user"
               inputId="num-of-people"
               // error
@@ -148,7 +149,7 @@ function App() {
             <div className="total__amount amount__container">
               <h2 className="amount__title">Total</h2>
               <span className="per__person">/ person</span>
-              <span className="amount">
+              <span data-testid="total-amount" className="amount">
                 {totalAmount === "NaN" ? "0" : totalAmount}
               </span>
             </div>
