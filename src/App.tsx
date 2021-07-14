@@ -119,7 +119,7 @@ function App() {
 
           <div className="num__ppl__container">
             <label htmlFor="num-of-people">Number of People</label>
-            <span className="text__error">Can't be Zero</span>
+            {/* <span className="text__error">Can't be Zero</span> */}
             <Input
               icon="bxs-user"
               inputId="num-of-people"
@@ -132,14 +132,14 @@ function App() {
 
           <div className="result__container">
             <div className="tip__amount amount__container">
-              <h3 className="amount__title">Tip Amount</h3>
+              <h2 className="amount__title">Tip Amount</h2>
               <span className="per__person">/ person</span>
               <span className="amount">
                 {isNaN(tipAmount as number) ? 0 : tipAmount}
               </span>
             </div>
             <div className="total__amount amount__container">
-              <h3 className="amount__title">Total</h3>
+              <h2 className="amount__title">Total</h2>
               <span className="per__person">/ person</span>
               <span className="amount">
                 {isNaN(totalAmount as number) ? 0 : totalAmount}
