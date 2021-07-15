@@ -8,7 +8,7 @@ type Props = {
   error?: boolean;
   extraClass?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  value: number | string;
+  value?: number | string;
   dataTestId?: string;
 };
 
