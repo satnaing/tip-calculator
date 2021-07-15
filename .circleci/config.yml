@@ -44,7 +44,7 @@ jobs:
           command: npm build
   codecov:
     steps:
-     - checkout
+      - checkout
       - run:
           name: install and run tests
           command: |
