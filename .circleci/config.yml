@@ -43,12 +43,13 @@ jobs:
           name: "Build the app"
           command: npm build
   codecov:
+    docker:
+      - image: cimg/node:15.1
     steps:
       - checkout
       - run:
           name: install and run tests
-          command: |
-            npm install && npm test
+          command: npm install && npm test
       - codecov/upload:
           file: "./coverage/clover.xml"
           token: $CODECOV_TOKEN
