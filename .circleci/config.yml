@@ -1,5 +1,6 @@
 version: 2.1
-
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   test:
     docker:
@@ -32,6 +33,20 @@ jobs:
           command: npm test -- --coverage
       - store_artifacts:
           path: coverage
+  build:
+    docker:
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: "Build the app"
+          command: npm build
+  codecov:
+    steps:
+      - codecov/upload:
+          file: "./coverage/clover.xml"
+          token: $CODECOV_TOKEN
 build:
   working_directory: /tmp
   steps:
@@ -51,3 +66,5 @@ workflows:
     jobs:
       - test
       - coverage
+      - build
+      - codecov

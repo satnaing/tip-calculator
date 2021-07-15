@@ -1,6 +1,6 @@
 # Frontend Mentor - Tip calculator app solution
 
-[![<ORG_NAME>](https://circleci.com/gh/satnaing/tip-calculator.svg?style=svg)](LINK)
+[![<SatNaing>](https://circleci.com/gh/satnaing/tip-calculator.svg?style=svg)](https://7-385802150-gh.circle-artifacts.com/0/coverage/lcov-report/src/index.html)
 
 This is a solution to the [Tip calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
