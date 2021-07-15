@@ -44,6 +44,11 @@ jobs:
           command: npm build
   codecov:
     steps:
+     - checkout
+      - run:
+          name: install and run tests
+          command: |
+            npm install && npm test
       - codecov/upload:
           file: "./coverage/clover.xml"
           token: $CODECOV_TOKEN
