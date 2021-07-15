@@ -143,14 +143,14 @@ function App() {
               <h2 className="amount__title">Tip Amount</h2>
               <span className="per__person">/ person</span>
               <span data-testid="tip-amount" className="amount">
-                {tipAmount === "NaN" ? "0" : tipAmount}
+                ${tipAmount === "NaN" ? "0" : tipAmount}
               </span>
             </div>
             <div className="total__amount amount__container">
               <h2 className="amount__title">Total</h2>
               <span className="per__person">/ person</span>
               <span data-testid="total-amount" className="amount">
-                {totalAmount === "NaN" ? "0" : totalAmount}
+                ${totalAmount === "NaN" ? "0" : totalAmount}
               </span>
             </div>
             <Button onClick={handleReset} reset>
