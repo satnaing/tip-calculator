@@ -43,6 +43,8 @@ jobs:
           name: "Build the app"
           command: npm build
   codecov:
+    docker:
+      - image: cimg/node:15.1
     steps:
       - codecov/upload:
           file: "./coverage/clover.xml"
