@@ -48,7 +48,7 @@ jobs:
       - run: npm install
       - run: npm test -- --coverage
       - codecov/upload:
-          file: '/coverage/'
+          file: "./coverage/"
 workflows:
   version: 2
   orb-free-workflow:
@@ -56,6 +56,4 @@ workflows:
       - test
       - coverage
       - build
-      - codecov:
-          requires:
-            - coverage
+      - codecov
