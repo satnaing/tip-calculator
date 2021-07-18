@@ -74,7 +74,7 @@ jobs:
           paths:
             - ~/.npm
       - run: npm test -- --coverage
-      - run: echo "ls -al"
+      - run: ls -al
       - codecov/upload:
           file: "./coverage/"
   dummy:
