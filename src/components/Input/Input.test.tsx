@@ -1,23 +1,30 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+// import userEvent from "@testing-library/user-event";
 import Input from "./Input";
 
-test("Make sure input is not a negative number", () => {
-  let inputValue = "";
-  const handleInput = jest.fn();
+test("Input working and allows number", () => {
+  const handleChange = jest.fn();
   render(
     <Input
-      dataTestId="test-input"
       icon="bx-dollar"
-      onChange={handleInput}
-      value={inputValue}
+      dataTestId="input-element"
+      onChange={handleChange}
     />
   );
-  const testInput = screen.getByTestId("test-input");
-  fireEvent.change(testInput, { target: { value: "1" } });
-  // expect(testInput).toHaveValue("1");
+  const inputTest = screen.getByTestId("input-element");
 
-  // fireEvent.change(testInput, { target: { value: "1" } });
-  // expect(testInput).toHaveValue(null);
-  // expect(tipAmount).not.toBeNaN;
-  // expect(tipAmount).toHaveTextContent("0");
+  // userEvent.type(inputTest, "1234");
+
+  expect(inputTest).toBeTruthy();
+  fireEvent.change(inputTest, { target: { value: "1234" } });
+
+  expect((inputTest as HTMLInputElement).value).toBe("1234");
+});
+
+test("Input not allows text by default", () => {
+  render(<Input icon="bx-dollar" dataTestId="num-input" />);
+  const numInput = screen.getByTestId("num-input");
+
+  fireEvent.change(numInput, { target: { value: "text not allowed" } });
+  expect((numInput as HTMLInputElement).value).toBe("");
 });

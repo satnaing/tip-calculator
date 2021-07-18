@@ -19,24 +19,18 @@ test("total amount to be zero", () => {
   expect(totalAmount).toHaveTextContent("0");
 });
 
-test("call handleBillInput function onClick", () => {
-  // render(<App />);
-  // const handleBillInput = jest.fn();
-  // const { container } = render(
-  //   <Input
-  //     dataTestId="mock-input"
-  //     icon="bx-dollar"
-  //     onChange={handleBillInput}
-  //   />
-  // );
-  // const input = container.firstChild;
-  // fireEvent.change(input, { target: { value: "a" } });
-  // expect(handleBillInput).toHaveBeenCalled;
-  const handleChange = jest.fn();
-  const { container } = render(<input type="text" onChange={handleChange} />);
-  const input = container.firstChild;
-  fireEvent.change(input as any, { target: { value: "a" } });
-  expect(handleChange).toHaveBeenCalledTimes(1);
+test("call handleBillInput function when Bill input onChange", () => {
+  const handleBillInput = jest.fn();
+  render(
+    <Input icon="bx-dollar" dataTestId="test-bill" onChange={handleBillInput} />
+  );
+  const billInput = screen.getByTestId("test-bill");
+
+  expect(billInput).toBeTruthy();
+
+  fireEvent.change(billInput, { target: { value: "2500" } });
+
+  expect(handleBillInput).toHaveBeenCalledTimes(1);
 });
 
 test("Calculate total amount & tip when bill, customTip and numOfPpl are changed", () => {
