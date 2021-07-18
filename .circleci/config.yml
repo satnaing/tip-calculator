@@ -45,6 +45,7 @@ jobs:
       - image: cimg/node:15.1
     steps:
       - checkout
+      - run: npm test -- --coverage
       - codecov/upload:
           file: '/coverage/'
 workflows:
