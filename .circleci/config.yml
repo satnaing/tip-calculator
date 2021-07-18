@@ -45,7 +45,8 @@ jobs:
       - image: cimg/node:15.1
     steps:
       - checkout
-      - codecov/upload
+      - codecov/upload:
+          file: '/coverage/'
 workflows:
   version: 2
   orb-free-workflow:
