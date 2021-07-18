@@ -75,14 +75,13 @@ jobs:
             - ~/.npm
       - run: npm test -- --coverage
       - run: ls -al
-      - codecov/upload:
-          file: ./coverage
+      - codecov/upload
   dummy:
     docker: 
       - image: cimg/node:15.1
     steps:
       - checkout
-      - run: cd coverage && ls -al
+      - run: ls -al
   
 
 workflows:
