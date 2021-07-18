@@ -45,9 +45,7 @@ jobs:
       - image: cimg/node:15.1
     steps:
       - checkout
-      - run:
-          name: "Upload to Codecov"
-          command: codecov/upload
+      - codecov/upload
 workflows:
   version: 2
   orb-free-workflow:
