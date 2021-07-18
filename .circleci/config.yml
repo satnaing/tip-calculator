@@ -53,4 +53,6 @@ workflows:
       - test
       - coverage
       - build
-      - codecov
+      - codecov:
+          requires:
+            - coverage
