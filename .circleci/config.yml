@@ -37,7 +37,7 @@ jobs:
             - ~/.npm
       - run:
           name: "Run Jest and Collect Coverage Reports"
-          command: npm test -- --coverage
+          command: npm test -- --coverage && codecov
       - run: echo "ls -al"
       - store_artifacts:
           path: coverage
