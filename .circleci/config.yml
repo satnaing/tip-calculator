@@ -8,8 +8,6 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          # See the configuration reference documentation for more details on using restore_cache and save_cache steps
-          # https://circleci.com/docs/2.0/configuration-reference/?section=reference#save_cache
           keys:
             - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run:
@@ -43,27 +41,15 @@ jobs:
           name: "Build the app"
           command: npm build
   codecov:
-    docker:
+    docker: 
       - image: cimg/node:15.1
     steps:
-      - codecov/upload:
-          file: "./coverage/clover.xml"
-          token: $CODECOV_TOKEN
-build:
-  working_directory: /tmp
-  steps:
-    - run:
-        name: Creating Dummy Artifacts
-        command: |
-          echo "my artifact file" > /tmp/art-1;
-          mkdir /tmp/artifacts;
-          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
-    - store_artifacts:
-        path: /tmp/art-1
-        destination: artifact-file
-    - store_artifacts:
-        path: /tmp/artifacts
+      - checkout
+      - run:
+          name: "Upload to Codecov"
+          command: codecov/upload
 workflows:
+  version: 2
   orb-free-workflow:
     jobs:
       - test
