@@ -8,8 +8,6 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          # See the configuration reference documentation for more details on using restore_cache and save_cache steps
-          # https://circleci.com/docs/2.0/configuration-reference/?section=reference#save_cache
           keys:
             - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run:
@@ -27,7 +25,16 @@ jobs:
       - image: cimg/node:15.1
     steps:
       - checkout
-      - run: npm install
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
       - run:
           name: "Run Jest and Collect Coverage Reports"
           command: npm test -- --coverage
@@ -38,38 +45,49 @@ jobs:
       - image: cimg/node:15.1
     steps:
       - checkout
-      - run: npm install
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
       - run:
           name: "Build the app"
           command: npm build
   codecov:
-    docker:
+    docker: 
       - image: cimg/node:15.1
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run:
-          name: install and run tests
-          command: npm install && npm test
-      - codecov/upload:
-          file: "./coverage/clover.xml"
-          token: $CODECOV_TOKEN
-build:
-  working_directory: /tmp
-  steps:
-    - run:
-        name: Creating Dummy Artifacts
-        command: |
-          echo "my artifact file" > /tmp/art-1;
-          mkdir /tmp/artifacts;
-          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
-    - store_artifacts:
-        path: /tmp/art-1
-        destination: artifact-file
-    - store_artifacts:
-        path: /tmp/artifacts
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run: npm test -- --coverage
+      - run: ls -al
+      - codecov/upload
+  dummy:
+    docker: 
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - run: ls -al
+
 workflows:
+  version: 2
   orb-free-workflow:
     jobs:
+      - dummy
       - test
       - coverage
       - build
