@@ -77,10 +77,19 @@ jobs:
       - run: echo "ls -al"
       - codecov/upload:
           file: "./coverage/"
+  dummy:
+    docker: 
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - run: ls -al
+  
+
 workflows:
   version: 2
   orb-free-workflow:
     jobs:
+      - dummy
       - test
       - coverage
       - build
