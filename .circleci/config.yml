@@ -59,7 +59,7 @@ jobs:
           name: "Build the app"
           command: npm build
   codecov:
-    docker: 
+    docker:
       - image: cimg/node:15.1
     steps:
       - checkout
@@ -74,20 +74,12 @@ jobs:
           paths:
             - ~/.npm
       - run: npm test -- --coverage
-      - run: ls -al
       - codecov/upload
-  dummy:
-    docker: 
-      - image: cimg/node:15.1
-    steps:
-      - checkout
-      - run: ls -al
 
 workflows:
   version: 2
-  orb-free-workflow:
+  main-workflow:
     jobs:
-      - dummy
       - test
       - coverage
       - build
