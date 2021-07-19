@@ -2,6 +2,8 @@
 
 [![<SatNaing>](https://circleci.com/gh/satnaing/tip-calculator.svg?style=svg)](https://7-385802150-gh.circle-artifacts.com/0/coverage/lcov-report/src/index.html)
 
+[![codecov](https://codecov.io/gh/satnaing/tip-calculator/branch/main/graph/badge.svg?token=TIKO3H44LL)](https://codecov.io/gh/satnaing/tip-calculator)
+
 This is a solution to the [Tip calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
